@@ -29,7 +29,6 @@ var server =
     contentBase: path.join(__dirname, "../build"),
     hot: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    noInfo: true
   });
 
 server.listen(env.PORT);

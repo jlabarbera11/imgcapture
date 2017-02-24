@@ -7,8 +7,8 @@ let ports = {};
 var createPort = (tabId) => {
   let port = chrome.tabs.connect(tabId, {name: "port"});
   port.onMessage.addListener((msg) => {
-    if (msg.type === "removeBindings") {
-      removeBindings(tabId);
+    if (msg.type === "disablePlugin") {
+      disablePlugin(tabId);
     }
   });
   port.onDisconnect.addListener(() => {
@@ -18,7 +18,7 @@ var createPort = (tabId) => {
   ports[tabId] = port;
 }
 
-var addBindings = (tabId) => {
+var enablePlugin = (tabId) => {
   ports[tabId].postMessage({type: "addBindings"});
 
   chrome.browserAction.setIcon({
@@ -28,7 +28,7 @@ var addBindings = (tabId) => {
   running = true;
 }
 
-var removeBindings = (tabId) => {
+var disablePlugin = (tabId) => {
   ports[tabId].postMessage({type: "removeBindings"});
 
   chrome.browserAction.setIcon({
@@ -44,8 +44,8 @@ chrome.browserAction.onClicked.addListener((tab) => {
   }
 
   if (!running) {
-    addBindings(tab.id);
+    enablePlugin(tab.id);
   } else {
-    removeBindings(tab.id);
+    disablePlugin(tab.id);
   }
 });
