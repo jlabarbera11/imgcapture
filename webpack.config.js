@@ -27,8 +27,9 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: "babel" },
-      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.js$/, loader: "babel", exclude: /node_modules/ },
+			{ test: /^contentscript.css$/, loader: "file-loader?name=[name].[ext]" },
+      { test: /\.css$/, loader: "style-loader!css-loader", exclude: /^contentscript.css$/ },
 			{ test: /\.(jpe?g|png|gif|svg)$/i, loader: "file-loader?name=[name].[ext]" }
     ]
   },
