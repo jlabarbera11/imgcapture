@@ -1,9 +1,9 @@
-var webpack = require("webpack"),
-    config = require("../webpack.config");
+let webpack = require('webpack')
+let config = require('../webpack.config')
 
-require("./prepare");
+require('./prepare')
 
-webpack(
-  config,
-  function (err) { if (err) throw err; }
-);
+webpack(config, (err) => {
+  if (err) throw err
+}
+)
